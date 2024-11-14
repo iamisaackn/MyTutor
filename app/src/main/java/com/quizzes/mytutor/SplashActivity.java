@@ -6,51 +6,55 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class splashactivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+public class SplashActivity extends AppCompatActivity {
 
     private TextView app_name;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_splash);
+
+        // Edge-to-Edge configuration
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        app_name=findViewById(R.id.app_name);
 
+        // Initialize views
+        app_name = findViewById(R.id.app_name);
+
+        // Animation
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.myanime);
         app_name.setAnimation(anim);
 
-        new Thread(){
+        // Firebase initialization
+        mAuth = FirebaseAuth.getInstance();
+        DbQuery.g_firestore = FirebaseFirestore.getInstance();
+
+        // Start thread to delay splash screen
+        new Thread() {
             @Override
-            public void run(){
+            public void run() {
                 try {
                     sleep(3000);
-                }catch(InterruptedException e){
+                } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Intent intent = new Intent(splashactivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(intent);
-                splashactivity.this.finish();
-
-
+                SplashActivity.this.finish();
             }
         }.start();
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-            });
-
     }
 }

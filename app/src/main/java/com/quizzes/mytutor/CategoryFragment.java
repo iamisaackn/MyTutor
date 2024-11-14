@@ -9,12 +9,12 @@ import android.widget.TextView;
 
 import java.util.List;
 
-public class CategoryAdapter extends BaseAdapter {
+public class CategoryFragment extends BaseAdapter {
 
     private List<CategoryModel> catlist;
 
     // Constructor to initialize the category list
-    public CategoryAdapter(List<CategoryModel> catlist) {
+    public CategoryFragment (List<CategoryModel> catlist) {
         this.catlist = catlist;
     }
 
