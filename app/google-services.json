@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "582393372156",
+    "project_id": "mytutor-8b27b",
+    "storage_bucket": "mytutor-8b27b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582393372156:android:5cacfedefd4ca282b66679",
+        "android_client_info": {
+          "package_name": "com.quizzes.mytutor"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbaka-WcIAa6moZeBfjFVDSeCp3Eqs4sg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
