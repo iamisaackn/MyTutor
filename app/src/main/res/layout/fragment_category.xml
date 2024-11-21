@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Category">
 
-    <!-- TODO: Update blank fragment layout -->
     <GridView
         android:id="@+id/category_grid"
         android:layout_width="0dp"

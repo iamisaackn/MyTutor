@@ -5,6 +5,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 import android.widget.FrameLayout;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -22,13 +23,12 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.quizzes.mytutor.databinding.ActivityMainBinding;
+/*import com.quizzes.mytutor.databinding.ActivityMainBinding;*/
 
 public class MainActivity extends AppCompatActivity {
+
     private BottomNavigationView bottomNavigationView;
     private FrameLayout main_frame;
-    private NavigationView navigationView;
-    private MaterialToolbar toolbar;
     private BottomNavigationView.OnItemSelectedListener OnItemSelectedListener = new BottomNavigationView.OnItemSelectedListener(){
 
                 @Override
@@ -49,34 +49,31 @@ public class MainActivity extends AppCompatActivity {
 
             };
     private AppBarConfiguration mAppBarConfiguration;
-    private ActivityMainBinding binding;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(R.layout.activity_main);
 
         main_frame=findViewById(R.id.main_frame);
 
-        navigationView = findViewById(R.id.nav_view);
-        toolbar = findViewById(R.id.toolbar);
 
         bottomNavigationView=findViewById(R.id.bottom_nav_bar);
         bottomNavigationView.setOnItemSelectedListener(OnItemSelectedListener);
 
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        DrawerLayout drawer = binding.drawerLayout;
-        NavigationView navigationView = binding.navView;
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
         setFragment(new Category());
@@ -84,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
